@@ -1,10 +1,10 @@
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TOOGLE_SIDEBAR } from './layout.animation';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeaderComponent } from '../template/header/header.component';
 import { SideMenuComponent } from '../template/side-menu/side-menu.component';
 import { FooterComponent } from '../template/footer/footer.component';
@@ -33,28 +33,26 @@ export class LayoutComponent implements OnInit {
 
   breadcumbsHome!: MenuItem;
 
+  router = inject(Router);
+
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Item Menu 1',
-        icon: 'fa fa-search fa-lg',
-        command: () => {},
+        label: 'Alugueis',
+        icon: 'fa fa-car fa-lg',
+        command: () => {
+          this.router.navigate(['/rent'])
+          this.breadcumbs = [{ label: 'Alugueis' }]
+        },
       },
       {
-        label: 'Item Menu 2',
-        icon: 'fa fa-home fa-lg',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 3',
-        icon: 'fa fa-folder-open',
-        command: () => {},
-      },
-      {
-        label: 'Item Menu 4',
-        icon: ' fa fa-money',
-        command: () => {},
-      },
+        label: 'Relatórios',
+        icon: 'fa fa-file fa-lg',
+        command: () => {
+          this.router.navigate(['/relatory'])
+          this.breadcumbs = [{ label: 'Relatórios' }]
+        },
+      }
     ];
   }
 
